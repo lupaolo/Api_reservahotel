@@ -2,6 +2,7 @@ require('dotenv').config()
 const Usuario = require('../models/Usuario')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
+const transporter = require('../database/transporter')
 
 const JWT_SECRET = process.env.SECRET
 
@@ -22,6 +23,16 @@ async function registrar(req, res) {
     })
 
     await usuario.save()
+
+    const info = await transporter.sendMail({
+        from: 'Reservare <lupuswildc@gmail.com>', // Seu e-mail remetente
+        to: email,
+        subject: 'Bem-vindo ao nosso serviço!',
+        html:'<h1>Olá, você foi cadastrado com sucesso em nosso serviço.</h1><p>Esperamos que aproveite!</p>',
+        text: `Olá você foi cadastrado com sucesso em nosso serviço. Esperamos que aproveite!`,
+    })
+
+    console.log('E-mail enviado:', info)
 
     res.status(201).json({ mensagem: "Usuário cadastrado com sucesso!" })
 }
