@@ -10,6 +10,8 @@ const schema = yup.object().shape({
         .required('campo obrigatório'),
     comentario: yup
         .string('campo precisa ser um texto'),
+    titulo: yup
+        .string('campo precisa ser um texto'),
 })
 
 function avaliacaoValidador(req, res, next) {

@@ -2,6 +2,18 @@ const mongoose = require('mongoose')
 
 const schema = new mongoose.Schema(
     {
+        nota: {
+            type: String,
+            required: true
+        },
+        comentario: {
+            type: String,
+            required: false
+        },
+        titulo: {
+            type: String,
+            required: false
+        },
         quarto: {
             type: mongoose.SchemaTypes.ObjectId,
             ref: 'quarto',
@@ -10,14 +22,6 @@ const schema = new mongoose.Schema(
         hospede: {
             type: mongoose.SchemaTypes.ObjectId,
             ref: 'cliente',
-            required: false
-        },
-        nota: {
-            type: String,
-            required: true
-        },
-        comentario: {
-            type: String,
             required: false
         }
 
